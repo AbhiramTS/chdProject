@@ -21,6 +21,7 @@ export class SawtoothService {
   private address: any;
   private context: any;
   public loggedInStatus: any;
+  private action;
 
   private FAMILY_NAME = 'docVer';
   private FAMILY_VERSION = '1.0';
@@ -95,19 +96,20 @@ export class SawtoothService {
   // Count button will call this function directly
   // For Count button calls, 'batchListBytes' will be null
   public async sendToRestAPI(batchListBytes): Promise<any> {
-    if (batchListBytes == null) {
+    //if (this.action == "Search") {
       // GET state
-      return this.getState(this.address)
-        .then((response) => {
-          return response.json();
-        })
-        .then((responseJson) => {
-          return this.getDecodedData(responseJson);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else {
+      // return this.getState(this.address)
+      //   .then((response) => {
+      //     return response.json();
+      //   })
+      //   .then((responseJson) => {
+      //     return this.getDecodedData(responseJson);
+      //   })
+      //   .catch((error) => {
+      //     console.error(error);
+      //   });
+    //} 
+    if(this.action==="Generate") {
       // POST batch list
       return this.postBatchList(batchListBytes);
     }
@@ -165,6 +167,9 @@ export class SawtoothService {
       action: action,
       payload: values
     };
+    this.action=payload.action;
+    console.log("************",this.action)
+ 
     const stringPayload = JSON.stringify(payload);
     const encodedPayload = this.encoder.encode(stringPayload);
     console.log('before', this.address);
@@ -280,6 +285,9 @@ export class SawtoothService {
 
     return batchListBytes;
 
+  }
+  addresser(){
+    return this.address
   }
 
 
