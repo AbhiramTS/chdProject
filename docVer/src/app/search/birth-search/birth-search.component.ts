@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SawtoothService } from 'src/app/sawtooth.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class BirthSearchComponent implements OnInit {
   private action
   private address
 
-  constructor( private search:SawtoothService,private route: ActivatedRoute) { }
+  constructor( private search:SawtoothService,private route: ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -29,6 +29,10 @@ export class BirthSearchComponent implements OnInit {
     const strData = JSON.stringify(data);
     // this.search.sendData(this.action, strData);
     this.search.search(strData);
+
+    // const transaction_id=this.search.getId()
+    this.router.navigate(['/verify'])
+    
 
   }
 

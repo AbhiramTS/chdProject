@@ -6,6 +6,7 @@ import {Secp256k1PrivateKey} from 'sawtooth-sdk/signing/secp256k1';
 import { TextEncoder, TextDecoder } from 'text-encoding/lib/encoding';
 import { Buffer } from 'buffer/';
 import { Http } from '@angular/http'
+import { of, Observable } from "rxjs";
 
 
 
@@ -22,6 +23,10 @@ export class SawtoothService {
   private address: any;
   private context: any;
   public loggedInStatus: any;
+  private uniqueId
+  private docData
+  private errorMessage
+  txn_id;
 
   private FAMILY_NAME = 'docVer';
   private FAMILY_VERSION = '1.0';
@@ -84,15 +89,22 @@ export class SawtoothService {
     const state = this.getState(this.address).subscribe((data) => {
       const dataJson = data.json();
       const decodedData = atob(dataJson.data);
+      console.log("The data is "+decodedData)
+      this.txn_id=decodedData
       const transaction = this.getTransaction(decodedData).subscribe((transaction) => {
         const transactionJson = transaction.json().data;
         const payload = transactionJson.payload;
         const payloadDecode = atob(payload);
         const payloadJson = JSON.parse(payloadDecode);
         const payloadData = payloadJson.payload;
-        console.log(payloadData);
+        console.log("The payload is"+payloadData);
+        console.log("The payload is"+typeof(payloadData));
+        this.docData=JSON.parse(payloadData)
+
       });
-    });
+    },(error)=>{console.log("The error is ",error.statusText)
+        this.errorMessage=error
+        });
   }
 
   // Count button will call this function directly
@@ -273,6 +285,16 @@ private getAddress(values) {
 
   }
 
+  // getId(){
+  //   return this.txn_id;
+  // }
+  // returnData(){
+  //   return Observable.of( this.docData)
+  // }
+
+  // returnError(){
+  //   return this.errorMessage
+  // }
 
   /*-------END Creating transactions & batches-----------*/
 

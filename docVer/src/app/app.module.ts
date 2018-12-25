@@ -21,6 +21,7 @@ import { FormsComponent } from './forms/forms.component';
 import { MarriageSearchComponent } from './search/marriage-search/marriage-search.component';
 import { BirthSearchComponent } from './search/birth-search/birth-search.component';
 import { DeathSearchComponent } from './search/death-search/death-search.component';
+import { VerifyComponent } from './verify/verify.component';
 // =======
 // >>>>>>> e4b05211b6c1df868d3e4eedaedaa6aa55e74a5c
 // >>>>>>> 9d92655fcb984ba04d5db0e1674996095a96060a
@@ -44,7 +45,8 @@ MarriageFormComponent,
 BirthSearchComponent,
 MarriageSearchComponent,
 DeathSearchComponent,
-FormsComponent
+FormsComponent,
+VerifyComponent
 // >>>>>>> e4b05211b6c1df868d3e4eedaedaa6aa55e74a5c
 // >>>>>>> 9d92655fcb984ba04d5db0e1674996095a96060a
   ],
@@ -54,6 +56,7 @@ FormsComponent
     AppRoutingModule,
     HttpModule,
     RouterModule.forRoot([
+        {path:'verify',component:VerifyComponent},
         {path: 'Generate/marriageForm', component: MarriageFormComponent},
         {path: 'Generate/deathForm', component: DeathFormComponent},
         {path: 'Generate/birthForm', component: BirthFormComponent},
