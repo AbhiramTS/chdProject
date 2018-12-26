@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from "@angular/router";
 import { Http } from '@angular/http';
+import { AuthServices } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   myInputVariable:ElementRef; 
   
   file:any
-  constructor(private router: Router,private http:Http) { }
+  constructor(private router: Router,private http:Http,private check:AuthServices) { }
 
   ngOnInit() {
     this.http.get('./assets/login.json').subscribe((resp) => {
@@ -43,11 +44,18 @@ export class LoginComponent implements OnInit {
 
   // }
 
-  reset() {
-    console.log(this.myInputVariable.nativeElement.files);
-    this.myInputVariable.nativeElement.value = "";
-    console.log(this.myInputVariable.nativeElement.files);
-}
+//   reset() {
+//     console.log(this.myInputVariable.nativeElement.files);
+//     this.myInputVariable.nativeElement.value = "";
+//     console.log(this.myInputVariable.nativeElement.files);
+// }
+
+  onSubmit(form){
+    console.log(form.value.userName)
+    console.log(form.value.passWord)
+    this.check.checker(form.value.userName,form.value.passWord)
+    this.router.navigate(['docList'])
+  }
    
 
 

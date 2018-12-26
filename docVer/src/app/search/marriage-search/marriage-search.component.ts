@@ -12,4 +12,6 @@ export class MarriageSearchComponent implements OnInit {
   ngOnInit() {
   }
 
+    
+
 }
