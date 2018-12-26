@@ -16,9 +16,9 @@ import { ButtonsComponent } from './buttons/buttons.component';
 import { RouterModule } from '@angular/router';
 import { BirthFormComponent } from './forms/birth-form/birth-form.component';
 import { DeathFormComponent } from './forms/death-form/death-form.component';
-import { MarriageFormComponent } from './forms/marriage-form/marriage-form.component';
+
 import { FormsComponent } from './forms/forms.component';
-import { MarriageSearchComponent } from './search/marriage-search/marriage-search.component';
+
 import { BirthSearchComponent } from './search/birth-search/birth-search.component';
 import { DeathSearchComponent } from './search/death-search/death-search.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -44,9 +44,9 @@ import { AuthServices } from './auth.service';
     ListofComponent,
 BirthFormComponent,
 DeathFormComponent,
-MarriageFormComponent,
+
 BirthSearchComponent,
-MarriageSearchComponent,
+
 DeathSearchComponent,
 FormsComponent,
 VerifyComponent
@@ -60,16 +60,16 @@ VerifyComponent
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot([
-        {path: 'verify', canActivate:[AuthGuardService],component: VerifyComponent},
-        {path: 'Generate/marriageForm', canActivate:[AuthGuardService], component: MarriageFormComponent},
+        {path: 'verify',component: VerifyComponent},
+
         {path: 'Generate/deathForm', canActivate:[AuthGuardService], component: DeathFormComponent},
-        {path: 'Generate/birthForm', canActivate:[AuthGuardService], component: BirthFormComponent},
+        {path: 'Generate/birthForm', component: BirthFormComponent},
         {path:'Search/birthForm'  , canActivate:[AuthGuardService], component:BirthSearchComponent},
         {path:'Search/deathForm' , canActivate:[AuthGuardService], component:DeathSearchComponent},
-        {path:'Search/marriageForm' , canActivate:[AuthGuardService], component:MarriageSearchComponent},
+        
         
         {path: 'docList', canActivate:[AuthGuardService], component: ListofComponent},
-        {path: 'register', component: RegisterComponent},
+        {path: 'register'    , component: RegisterComponent},
         {path: 'login', component: LoginComponent},
         {path: '', redirectTo: 'login', pathMatch: 'full'},
         {path: '**', redirectTo: 'login', pathMatch: 'full'}
