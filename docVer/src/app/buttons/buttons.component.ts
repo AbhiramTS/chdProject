@@ -22,6 +22,7 @@ export class ButtonsComponent implements OnInit {
     if(this.action.action === "Generate"){
       this.changeStyle();
     }
+    
   }
 
   buttonClick(event):void {

@@ -56,6 +56,8 @@ export class SawtoothService {
     const state = this.getState(this.address).subscribe((stateResp: StateResponce) => {
       console.log(stateResp);
       const decodedData = atob(stateResp.data);
+      const decodedDataJSON=JSON.parse(decodedData)
+      
       const transaction = this.getTransaction(decodedData).subscribe(
         (transactionResp: Transaction) => {
           console.log('transaction', transactionResp);
@@ -191,7 +193,8 @@ export class SawtoothService {
 
 
   // creating state address
-private getAddress(values) {
+private getAddress(values) { 
+  
   const valueJSON = JSON.parse(values);
     const valueKeys = Object.keys(valueJSON);
     const important = valueJSON['imp'];
@@ -273,6 +276,28 @@ private getAddress(values) {
     return batchListBytes;
 
   }
+
+  registerMarriage(hus,wif){
+    const addressW=this.getAddress(wif)
+    const addressH=this.getAddress(hus)
+    console.log(addressW,"kjhkhkhkh",addressH)
+    
+    this.getState(addressH)
+      .subscribe((res)=>{console.log("married")},
+      (error)=>{console.log(error)
+        // this.getState(addressW)
+        //   .subscribe((res)=>{console.log('Married Wife')},(error)=>{
+        //     this.register('Generate',addressH)
+        //     this.register('Generate',addressW)
+        //   })
+      })
+
+    // const payload = this.getEncodedPayload(action, value);
+    // const transactionsList = this.getTransactionsList(payload);
+    // const batchListBytes = this.getBatchList(transactionsList);
+
+  }
+
 
   getPayload(){
     return this.payloadData
